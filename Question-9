@@ -1,0 +1,64 @@
+XML File
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean class=" com.springcore.lifecycle.Samosa" name="S1"
+init-method="init"  destroy-method="destroy">
+<property name="price" value="10"/>
+
+
+</bean>
+</beans>
+
+Samosa.java
+
+package com.springcore.lifecycle;
+
+public class Samosa {
+	private double price;
+
+	public Samosa(double price) {
+		super();
+		this.price = price;
+	}
+
+	public Samosa() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Samosa [price=" + price + "]";
+	}
+	
+	public void init()
+	{
+		System.out.println("This is intilization method");
+		
+	}
+	public void destroy()
+	{
+		System.out.print("This is destroy method");
+	}
+}
+
+
+
+Main.java
+package com.springcore.lifecycle;
+import org.springframework.context.support.ClassPathXmlApplicationContex;
+import org.springframework.context.ApplicationContext;
+
+
+public class Main1 {
+	public static void main(String[] args)
+	{
+		ApplicationContext context=new ClassPathXmlApplicationContex("config.xml");
+		Samosa S1=(Samosa) context.getBean("S1");
+		System.out.print(S1);
+		
+ }
+}
